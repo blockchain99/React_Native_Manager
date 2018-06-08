@@ -1,0 +1,75 @@
+1.~/reactNativeRedux/myDev$ react-native init manager2
+1-1. $ cd manager2
+2. manager2$ npm install --save react-redux redux
+  manager2$ npm install --save-dev eslint-config-rallycoding
+3. manager2$ react-native run-android
+3-1. change in dev setting of emulator as localhost:8081
+4. manager2$ npm install --save firebase
+5. manager2$ npm install --save redux-thunk
+6. manager2$ npm install --save react-navigation
+7. manager2$ npm install --save react-native-communications
+7. make ref file: emulator for excuting 3 lines of command.
+1). (in project directory) mkdir android/app/src/main/assets
+************* always do following in case of error : emulator **********
+2). react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res
+3). react-native run-android
+===If error happend ! ---
+dev svr returned reponse error code:500, Bundler has encountered internal
+error -> Error handling
+  1) sudo lsof -i :8081  2) kill -9 [PID]
+  2) npm start
+  3) react-native run-android  -> It works !!!
+-----
+8. $npm install --save lodash (convert obj to array)
+
+- crtl + d : multi select in aotm .
+9. In CardSection.js,
+<View style{[styles.containerStyle, props.style]}
+, apply props.style first if same style exist in
+containerStyle.
+
+10. firebase / database/ rules /
+change following to ASF.
+{
+  "rules": {
+    ".read": "auth != null",
+    ".write": "auth != null"
+  }
+}  ====>
+{
+"rules": {
+  "users": {
+    "$uid": {
+      ".read": "$uid === auth.uid",
+      ".write": "$uid === auth.uid"
+    }
+  }
+}
+}
+11.
+EmployeeCreate, EmployeeEdit has common module,
+EmployeeForm consits of 3field(name, phone, shift).
+12.in EmployeeCreate.js, <EmployeeForm {...this.props} />
+-> take all the different props that EmpolyeeCreate has been
+passed and forward them on to EmployeeForm as well.
+13. www.npmjs.com
+react-native-communications
+-> phone call, email, text
+manager2$ npm install --save react-native-communications
+--> 1) emulator for ios: not works
+    2) but android works on emulator.
+14. fire employee ----->
+<Button onPress={() => this.setState({ showModal: !this.state.showModal }) />
+* https://facebook.github.io/react-native/docs/modal.html -> modal
+Modal component is a simple way to present content above an enclosing view.
+<Modal
+  animationtype={"slide"}
+  transparent={false}
+  visible={this.state.modalVisible}
+  onRequstClose={() => {alert("Modal has been closed.")}}
+  >
+  15. how to make <Confirm> w/ Modal visible -->
+  In EmployeeEdit.js,
+  state = { showModal: false };
+  <Button onPress={() => this.setState({ showModal: !this.state.showModal })}
+  <Confirm visible={this.state.showModal} > // Now visible
